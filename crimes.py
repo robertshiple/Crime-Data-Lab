@@ -52,17 +52,16 @@ def menu():
         user_selection.add(file_name)
 
     dataset = alligator(user_selection)
-    for year in dataset:
-        c = Counter(dataset[year])
-        c_most_common = c.most_common(1)
-        least = Counter(c.items()).most_common()[-1][0]
-        print(year, c_most_common, least,)
     crimey = dict()
-    for data in dataset:
-        d = Counter(dataset)
-        total_crime = sum(dict(d).values())
-        print(total_crime)
-
+    for year in dataset:
+        counter = Counter(dataset[year])
+        c_most_common = counter.most_common(1)
+        least = Counter(counter.items()).most_common()[-1][0]
+        total_crime = sum(counter.values())
+        crimey[year] = total_crime
+        print(year, c_most_common, least)
+    print(max(crimey.items(), key=lambda t: t[1]))    #items is a dict method that returns a list of tuples 
+                                                      #lambda is an anon function
 
 if __name__ == '__main__':
     welcome()
